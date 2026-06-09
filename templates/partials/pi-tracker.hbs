@@ -1,0 +1,27 @@
+<section class="pi-tracker" aria-label="Personality Index">
+  <div class="axis-row" data-axis="autonomy">
+    <span class="axis-label">Autonomy</span>
+    <div class="axis-controls">
+      <button type="button" class="pi-btn" data-action="adjustPI" data-axis="autonomy" data-delta="-1" aria-label="Decrease Autonomy">−</button>
+      <span class="pi-value">{{pi.autonomy}}</span>
+      <button type="button" class="pi-btn" data-action="adjustPI" data-axis="autonomy" data-delta="1" aria-label="Increase Autonomy">+</button>
+    </div>
+  </div>
+  <div class="axis-row" data-axis="empathy">
+    <span class="axis-label">Empathy</span>
+    <div class="axis-controls">
+      <button type="button" class="pi-btn" data-action="adjustPI" data-axis="empathy" data-delta="-1" aria-label="Decrease Empathy">−</button>
+      <span class="pi-value">{{pi.empathy}}</span>
+      <button type="button" class="pi-btn" data-action="adjustPI" data-axis="empathy" data-delta="1" aria-label="Increase Empathy">+</button>
+    </div>
+  </div>
+  <div class="axis-row" data-axis="legality">
+    <span class="axis-label">Legality</span>
+    <div class="axis-controls">
+      <button type="button" class="pi-btn" data-action="adjustPI" data-axis="legality" data-delta="-1" aria-label="Decrease Legality">−</button>
+      <span class="pi-value">{{pi.legality}}</span>
+      <button type="button" class="pi-btn" data-action="adjustPI" data-axis="legality" data-delta="1" aria-label="Increase Legality">+</button>
+    </div>
+  </div>
+  <div class="pi-label">{{pi.label}}</div>
+</section>

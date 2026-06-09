@@ -1,0 +1,17 @@
+<section class="character-tab">
+  <div class="character-pi">
+    <div class="pi-label-prominent">{{pi.label}}</div>
+  </div>
+  <dl class="character-details">
+    {{#each detailKeys}}
+      {{#with (lookup ../details key)}}
+        {{#if this}}
+        <div class="character-detail-row">
+          <dt class="detail-label">{{../label}}</dt>
+          <dd class="detail-value">{{this}}</dd>
+        </div>
+        {{/if}}
+      {{/with}}
+    {{/each}}
+  </dl>
+</section>

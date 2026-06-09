@@ -1,0 +1,34 @@
+<section class="action-attributes">
+  <h3 class="section-heading">Attributes</h3>
+  <div class="attributes-grid">
+    {{#each attributes}}
+    <div class="attribute-cell">
+      <div class="attribute-label">{{label}}</div>
+      <button type="button" class="attr-value" data-action="rollAttribute" data-attribute="{{key}}" title="Roll {{label}}">{{value}}</button>
+    </div>
+    {{/each}}
+  </div>
+</section>
+
+<section class="action-skills">
+  <h3 class="section-heading">Skills</h3>
+  {{#if skills.length}}
+    {{#each skills}}
+    <div class="skill-group">
+      <h4 class="skill-group-heading">{{attributeLabel}}</h4>
+      <ul class="skill-list">
+        {{#each skills}}
+        <li class="skill-row">
+          <span class="skill-name">{{name}}</span>
+          <span class="skill-rank">Rank {{rank}}</span>
+          <span class="skill-mod">Mod {{rollModifier}}</span>
+          <button type="button" class="skill-roll-btn" data-action="rollSkill" data-item-id="{{id}}">Roll</button>
+        </li>
+        {{/each}}
+      </ul>
+    </div>
+    {{/each}}
+  {{else}}
+    <p class="empty-state">No skills on this hero yet.</p>
+  {{/if}}
+</section>

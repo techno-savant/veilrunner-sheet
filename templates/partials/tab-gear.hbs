@@ -1,0 +1,37 @@
+<section class="gear-section">
+  <h3 class="section-heading">Equipment</h3>
+  {{#if gear.length}}
+    <ul class="item-list">
+      {{#each gear}}
+      <li class="item-row" data-item-id="{{id}}" data-action="toggleItemDetail">
+        <img class="item-thumb" src="{{img}}" alt="" />
+        <div class="item-body">
+          <div class="item-name">{{name}}</div>
+          <div class="item-detail">{{description}}</div>
+        </div>
+      </li>
+      {{/each}}
+    </ul>
+  {{else}}
+    <p class="empty-state">No equipment.</p>
+  {{/if}}
+</section>
+
+<section class="gear-section">
+  <h3 class="section-heading">Augmentations</h3>
+  {{#if augmentations.length}}
+    <ul class="item-list">
+      {{#each augmentations}}
+      <li class="item-row" data-item-id="{{id}}" data-action="toggleItemDetail">
+        <img class="item-thumb" src="{{img}}" alt="" />
+        <div class="item-body">
+          <div class="item-name">{{name}}</div>
+          <div class="item-detail">{{description}}</div>
+        </div>
+      </li>
+      {{/each}}
+    </ul>
+  {{else}}
+    <p class="empty-state">No augmentations.</p>
+  {{/if}}
+</section>

@@ -1,0 +1,651 @@
+/* Veilrunner Sheet module: dark, Foundry-v13-native hero sheet and chat card styling. */
+
+:root {
+  --tier-strong-hit: #c9a227;
+  --tier-hit: #4a9c59;
+  --tier-close-hit: #8aab3c;
+  --tier-glancing: #c97c27;
+  --tier-miss: #9c4a4a;
+}
+
+.veilrunner.hero-sheet {
+  --bg: #1c1d22;
+  --bg-elevated: #25262c;
+  --bg-card: #2a2c34;
+  --border: #3a3c44;
+  --border-strong: #555864;
+  --text: #d8d8dd;
+  --text-muted: #9098a6;
+  --accent: #5a8ac9;
+  --accent-strong: #8ab2eb;
+  --hp-fill: #4a9c59;
+  --node-unlocked: #2a4a7a;
+  --node-locked: #222;
+
+  color: var(--text);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 20%),
+    var(--bg);
+}
+
+.veilrunner.hero-sheet .window-content {
+  padding: 0;
+  background: transparent;
+  color: inherit;
+}
+
+.veilrunner.hero-sheet .hero-sheet-inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  padding: 10px;
+  gap: 10px;
+  font-family: Signika, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+}
+
+.veilrunner.hero-sheet .sheet-header {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.veilrunner.hero-sheet .portrait {
+  width: 100px;
+  height: 100px;
+  flex: 0 0 100px;
+  object-fit: cover;
+  cursor: pointer;
+  border: 1px solid var(--border-strong);
+  border-radius: 10px;
+  background: var(--bg-card);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.28);
+}
+
+.veilrunner.hero-sheet .header-main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.veilrunner.hero-sheet .actor-name-input {
+  width: 100%;
+  padding: 0;
+  border: 0;
+  border-bottom: 1px solid transparent;
+  border-radius: 0;
+  background: transparent;
+  color: var(--text);
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.15;
+  box-shadow: none;
+}
+
+.veilrunner.hero-sheet .actor-name-input:hover,
+.veilrunner.hero-sheet .actor-name-input:focus {
+  border-bottom-color: var(--accent);
+  box-shadow: none;
+}
+
+.veilrunner.hero-sheet .actor-name-input::placeholder {
+  color: color-mix(in srgb, var(--text-muted) 80%, transparent);
+}
+
+.veilrunner.hero-sheet .hp-display {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.veilrunner.hero-sheet .hp-label {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.veilrunner.hero-sheet .hp-bar {
+  width: 100%;
+  height: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.35);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.45);
+}
+
+.veilrunner.hero-sheet .hp-bar-fill {
+  height: 100%;
+  border-radius: inherit;
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--hp-fill) 72%, black), var(--hp-fill));
+  box-shadow: 0 0 12px color-mix(in srgb, var(--hp-fill) 35%, transparent);
+}
+
+.veilrunner.hero-sheet .pi-tracker {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent), var(--bg-card);
+}
+
+.veilrunner.hero-sheet .pi-tracker .axis-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.veilrunner.hero-sheet .axis-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+}
+
+.veilrunner.hero-sheet .axis-controls {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+}
+
+.veilrunner.hero-sheet .pi-value {
+  min-width: 2.5em;
+  text-align: center;
+  font-family: monospace;
+  font-size: 1rem;
+  color: var(--text);
+}
+
+.veilrunner.hero-sheet .pi-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 1px solid var(--border-strong);
+  border-radius: 6px;
+  background: var(--bg-elevated);
+  color: var(--text);
+  cursor: pointer;
+  line-height: 1;
+  font-size: 1rem;
+  transition: background-color 120ms ease, border-color 120ms ease, color 120ms ease;
+}
+
+.veilrunner.hero-sheet .pi-btn:hover,
+.veilrunner.hero-sheet .pi-btn:focus {
+  border-color: var(--accent-strong);
+  background: color-mix(in srgb, var(--accent) 22%, var(--bg-elevated));
+  color: #f4f7fc;
+  box-shadow: none;
+}
+
+.veilrunner.hero-sheet .pi-label {
+  text-align: center;
+  font-style: italic;
+  color: var(--text-muted);
+}
+
+.veilrunner.hero-sheet .pi-label-prominent {
+  text-align: center;
+  font-size: 1.3rem;
+  font-style: italic;
+  color: var(--accent-strong);
+}
+
+.veilrunner.hero-sheet .tabs {
+  display: flex;
+  flex-direction: row;
+  gap: 6px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+}
+
+.veilrunner.hero-sheet .tab-button {
+  padding: 8px 12px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  border-radius: 8px 8px 0 0;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 120ms ease, color 120ms ease, border-color 120ms ease;
+}
+
+.veilrunner.hero-sheet .tab-button:hover,
+.veilrunner.hero-sheet .tab-button:focus {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+  box-shadow: none;
+}
+
+.veilrunner.hero-sheet .tab-button.active {
+  border-bottom-color: var(--accent-strong);
+  color: #f1f5ff;
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+.veilrunner.hero-sheet .tab-body {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: 4px 2px 2px;
+}
+
+.veilrunner.hero-sheet .tab-body .tab {
+  display: none;
+}
+
+.veilrunner.hero-sheet .tab-body .tab.active {
+  display: block;
+}
+
+.veilrunner.hero-sheet .section-heading {
+  margin: 0 0 8px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--text-muted);
+}
+
+.veilrunner.hero-sheet .attributes-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.veilrunner.hero-sheet .attribute-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 10px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent), var(--bg-card);
+}
+
+.veilrunner.hero-sheet .attribute-label {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.veilrunner.hero-sheet .attr-value,
+.veilrunner.hero-sheet .attribute-cell .attr-value {
+  min-width: 3rem;
+  padding: 4px 10px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.1;
+  transition: background-color 120ms ease, border-color 120ms ease;
+}
+
+.veilrunner.hero-sheet .attr-value:hover,
+.veilrunner.hero-sheet .attr-value:focus {
+  border-color: var(--border-strong);
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: none;
+}
+
+.veilrunner.hero-sheet .skill-group {
+  margin-block: 12px;
+}
+
+.veilrunner.hero-sheet .skill-group-heading {
+  margin: 0 0 6px;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+}
+
+.veilrunner.hero-sheet .skill-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.veilrunner.hero-sheet .skill-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  transition: background-color 120ms ease;
+}
+
+.veilrunner.hero-sheet .skill-row:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.veilrunner.hero-sheet .skill-name {
+  flex: 1;
+  min-width: 0;
+}
+
+.veilrunner.hero-sheet .skill-rank,
+.veilrunner.hero-sheet .skill-mod {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.veilrunner.hero-sheet .skill-roll-btn {
+  padding: 4px 10px;
+  border: 1px solid color-mix(in srgb, var(--accent-strong) 45%, var(--border-strong));
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 20%, var(--bg-elevated));
+  color: #eef5ff;
+  cursor: pointer;
+}
+
+.veilrunner.hero-sheet .skill-roll-btn:hover,
+.veilrunner.hero-sheet .skill-roll-btn:focus {
+  background: color-mix(in srgb, var(--accent) 35%, var(--bg-elevated));
+  border-color: var(--accent-strong);
+  box-shadow: none;
+}
+
+.veilrunner.hero-sheet .talent-tree-wrapper {
+  position: relative;
+  margin-block: 12px;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent), var(--bg-card);
+}
+
+.veilrunner.hero-sheet .talent-tree-heading {
+  margin: 0 0 10px;
+  font-weight: 600;
+}
+
+.veilrunner.hero-sheet .talent-tree-svg {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 4px;
+}
+
+.veilrunner.hero-sheet .talent-tree-svg svg {
+  display: block;
+  min-width: 100%;
+}
+
+.veilrunner.hero-sheet .talent-node {
+  cursor: pointer;
+}
+
+.veilrunner.hero-sheet .talent-node.unlocked rect {
+  fill: var(--node-unlocked);
+}
+
+.veilrunner.hero-sheet .talent-node.locked rect {
+  fill: #222;
+  opacity: 0.78;
+}
+
+.veilrunner.hero-sheet .talent-popover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  max-width: 260px;
+  padding: 10px 12px;
+  border: 1px solid var(--border-strong);
+  border-radius: 10px;
+  background: rgba(20, 21, 26, 0.96);
+  color: var(--text);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4);
+  z-index: 30;
+  pointer-events: none;
+}
+
+.veilrunner.hero-sheet .talent-popover.hidden {
+  display: none;
+}
+
+.veilrunner.hero-sheet .talent-popover-name {
+  margin: 0 0 6px;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.veilrunner.hero-sheet .talent-popover-desc {
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: color-mix(in srgb, var(--text) 88%, var(--text-muted));
+}
+
+.veilrunner.hero-sheet .gear-section {
+  margin-block: 12px;
+}
+
+.veilrunner.hero-sheet .item-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.veilrunner.hero-sheet .item-row {
+  display: flex;
+  cursor: pointer;
+  gap: 10px;
+  padding: 8px 6px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  transition: background-color 120ms ease;
+}
+
+.veilrunner.hero-sheet .item-row:hover,
+.veilrunner.hero-sheet .item-row.expanded {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.veilrunner.hero-sheet .item-thumb {
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+  object-fit: cover;
+  margin-right: 2px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg-elevated);
+}
+
+.veilrunner.hero-sheet .item-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.veilrunner.hero-sheet .item-name {
+  font-weight: 600;
+}
+
+.veilrunner.hero-sheet .item-detail {
+  display: none;
+  padding-top: 6px;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  line-height: 1.45;
+}
+
+.veilrunner.hero-sheet .item-row.expanded .item-detail {
+  display: block;
+}
+
+.veilrunner.hero-sheet .character-tab {
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent), var(--bg-card);
+}
+
+.veilrunner.hero-sheet .character-pi {
+  margin-bottom: 14px;
+  text-align: center;
+}
+
+.veilrunner.hero-sheet .character-details {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+}
+
+.veilrunner.hero-sheet .character-detail-row {
+  display: flex;
+  gap: 12px;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.veilrunner.hero-sheet .detail-label {
+  min-width: 8em;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+}
+
+.veilrunner.hero-sheet .detail-value {
+  flex: 1;
+  margin: 0;
+}
+
+.veilrunner.hero-sheet .empty-state {
+  padding-block: 18px;
+  text-align: center;
+  font-style: italic;
+  color: var(--text-muted);
+}
+
+.chat-tier {
+  display: block;
+  margin-top: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #f8f8fb;
+}
+
+.chat-tier.tier-strong-hit {
+  background-color: var(--tier-strong-hit);
+}
+
+.chat-tier.tier-hit {
+  background-color: var(--tier-hit);
+}
+
+.chat-tier.tier-close-hit {
+  background-color: var(--tier-close-hit);
+}
+
+.chat-tier.tier-glancing {
+  background-color: var(--tier-glancing);
+}
+
+.chat-tier.tier-miss {
+  background-color: var(--tier-miss);
+}
+
+.veilrunner-chat-card {
+  padding: 12px;
+  border: 1px solid #4b5161;
+  border-left: 4px solid #5a8ac9;
+  border-radius: 12px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 24%),
+    #202229;
+  color: #d8d8dd;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+}
+
+.veilrunner-chat-card .chat-actor {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.veilrunner-chat-card .chat-actor-img {
+  width: 32px;
+  height: 32px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.veilrunner-chat-card .chat-actor-name {
+  font-weight: 600;
+}
+
+.veilrunner-chat-card .chat-label {
+  margin-bottom: 8px;
+  font-size: 0.82rem;
+  font-style: italic;
+  color: #9aa2b0;
+}
+
+.veilrunner-chat-card .chat-roll {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+}
+
+.veilrunner-chat-card .chat-d20,
+.veilrunner-chat-card .chat-mod {
+  color: #d6deeb;
+}
+
+.veilrunner-chat-card .chat-total {
+  font-size: 1.1rem;
+  color: #f4f8ff;
+}
+
+.veilrunner-chat-card .chat-equals,
+.veilrunner-chat-card .chat-op {
+  color: #8ab2eb;
+  font-weight: 700;
+}
+
+.veilrunner-chat-card .chat-vs-dc {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+  font-size: 0.8rem;
+  color: #9aa2b0;
+}

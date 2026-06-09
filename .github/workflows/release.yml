@@ -1,0 +1,54 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout veilrunner-sheet
+        uses: actions/checkout@v4
+        with:
+          path: veilrunner-sheet
+      - name: Checkout lexicon-core (sibling)
+        uses: actions/checkout@v4
+        with:
+          repository: techno-savant/lexicon-core
+          path: lexicon-core
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: veilrunner-sheet/package-lock.json
+      - name: Install dependencies
+        working-directory: veilrunner-sheet
+        run: npm ci
+      - name: Typecheck
+        working-directory: veilrunner-sheet
+        run: npm run typecheck
+      - name: Build
+        working-directory: veilrunner-sheet
+        run: npm run build
+      - name: Patch module.json version from tag
+        working-directory: veilrunner-sheet
+        run: |
+          TAG_VERSION="${GITHUB_REF_NAME#v}"
+          jq --arg v "$TAG_VERSION" '.version = $v' module.json > module.json.tmp
+          mv module.json.tmp module.json
+          echo "Patched module.json to version $TAG_VERSION"
+      - name: Package module
+        working-directory: veilrunner-sheet
+        run: zip -r module.zip module.json dist/ styles/ templates/
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            veilrunner-sheet/module.json
+            veilrunner-sheet/module.zip

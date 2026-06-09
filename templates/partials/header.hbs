@@ -1,0 +1,16 @@
+<header class="sheet-header">
+  <img class="portrait" src="{{actor.img}}" alt="{{actor.name}}" data-edit="img" />
+  <div class="header-main">
+    <input type="text" class="actor-name-input" name="name" value="{{actor.name}}" placeholder="Hero name" />
+    <div class="hp-display" aria-label="Hit points">
+      <div class="hp-label">
+        <span class="hp-text">HP</span>
+        <span class="hp-numbers">{{health.value}} / {{health.max}}</span>
+      </div>
+      <div class="hp-bar" role="progressbar" aria-valuenow="{{health.value}}" aria-valuemin="0" aria-valuemax="{{health.max}}">
+        <div class="hp-bar-fill" style="width: {{health.pct}}%;"></div>
+      </div>
+    </div>
+    {{> modules/veilrunner-sheet/templates/partials/pi-tracker.hbs}}
+  </div>
+</header>

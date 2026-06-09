@@ -1,0 +1,26 @@
+<div class="hero-sheet-inner">
+  {{> modules/veilrunner-sheet/templates/partials/header.hbs}}
+
+  <nav class="tabs">
+    {{#each tabs}}
+    <button type="button" class="tab-button {{#if active}}active{{/if}}" data-action="changeTab" data-tab="{{id}}">{{label}}</button>
+    {{/each}}
+  </nav>
+
+  <div class="tab-body">
+    <div class="tab tab-action {{#if (eq activeTab 'action')}}active{{/if}}" data-tab="action">
+      {{> modules/veilrunner-sheet/templates/partials/tab-action.hbs}}
+    </div>
+    <div class="tab tab-talents {{#if (eq activeTab 'talents')}}active{{/if}}" data-tab="talents">
+      {{> modules/veilrunner-sheet/templates/partials/tab-talents.hbs}}
+    </div>
+    <div class="tab tab-gear {{#if (eq activeTab 'gear')}}active{{/if}}" data-tab="gear">
+      {{> modules/veilrunner-sheet/templates/partials/tab-gear.hbs}}
+    </div>
+    <div class="tab tab-character {{#if (eq activeTab 'character')}}active{{/if}}" data-tab="character">
+      {{> modules/veilrunner-sheet/templates/partials/tab-character.hbs}}
+    </div>
+  </div>
+
+  <div class="talent-popover hidden" role="dialog" aria-hidden="true"></div>
+</div>

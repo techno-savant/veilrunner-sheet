@@ -1,0 +1,12 @@
+<section class="talents-tab">
+  {{#if talentTrees.length}}
+    {{#each talentTrees}}
+    <div class="talent-tree-wrapper" data-tree-id="{{treeId}}">
+      <h3 class="talent-tree-heading">{{treeName}}</h3>
+      <div class="talent-tree-svg">{{{treeSvg}}}</div>
+    </div>
+    {{/each}}
+  {{else}}
+    <p class="empty-state">No talents acquired.</p>
+  {{/if}}
+</section>

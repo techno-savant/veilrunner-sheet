@@ -1,0 +1,25 @@
+<div class="veilrunner-chat-card">
+  <header class="chat-actor">
+    <img class="chat-actor-img" src="{{actorImg}}" alt="" />
+    <div class="chat-actor-name">{{actorName}}</div>
+  </header>
+  <div class="chat-label">{{label}}</div>
+  <div class="chat-roll">
+    <span class="chat-d20">d20 ({{d20}})</span>
+    <span class="chat-op">+</span>
+    <span class="chat-mod">{{modifier}}</span>
+    <span class="chat-equals">=</span>
+    <span class="chat-total"><strong>{{total}}</strong></span>
+  </div>
+  {{#if dc}}
+  <div class="chat-vs-dc">
+    <span class="chat-dc-label">vs DC</span>
+    <span class="chat-dc-value">{{dc}}</span>
+    <span class="chat-margin-arrow">→</span>
+    <span class="chat-margin">{{marginDisplay}}</span>
+  </div>
+  {{/if}}
+  {{#if tier}}
+  <div class="chat-tier tier-{{tier}}">{{tierLabel}}</div>
+  {{/if}}
+</div>
