@@ -2,11 +2,8 @@
   <header class="item-header">
     <img class="item-img" src="{{item.img}}" alt="" />
     <div class="item-header-main">
-      {{#if isEditable}}
-        <input class="item-name-input" type="text" data-field="name" value="{{item.name}}" placeholder="Item name" />
-      {{else}}
-        <h2 class="item-name-display">{{item.name}}</h2>
-      {{/if}}
+      <h2 class="item-name-display view-only">{{item.name}}</h2>
+      <input class="item-name-input edit-only" type="text" data-field="name" value="{{item.name}}" placeholder="Item name" />
       <span class="item-type-tag">{{item.type}}</span>
     </div>
   </header>
@@ -16,60 +13,42 @@
     {{#if isSkill}}
     <div class="item-field-row">
       <label class="item-field-label">Attribute</label>
-      {{#if isEditable}}
-        <select class="item-field-value" data-field="system.attribute">
-          {{#each attributeOptions}}
-          <option value="{{value}}" {{#if (eq ../attribute value)}}selected{{/if}}>{{label}}</option>
-          {{/each}}
-        </select>
-      {{else}}
-        <span class="item-field-value">{{attribute}}</span>
-      {{/if}}
+      <span class="item-field-value view-only">{{attributeLabel}}</span>
+      <select class="item-field-value edit-only" data-field="system.attribute">
+        {{#each attributeOptions}}
+        <option value="{{value}}" {{#if (eq ../attribute value)}}selected{{/if}}>{{label}}</option>
+        {{/each}}
+      </select>
     </div>
     <div class="item-field-row">
       <label class="item-field-label">Rank</label>
-      {{#if isEditable}}
-        <input class="item-field-value item-rank-input" type="number" data-field="system.rank" value="{{rank}}" min="0" max="10" />
-      {{else}}
-        <span class="item-field-value">{{rank}}</span>
-      {{/if}}
+      <span class="item-field-value view-only">{{rank}}</span>
+      <input class="item-field-value item-rank-input edit-only" type="number" data-field="system.rank" value="{{rank}}" min="0" max="10" />
     </div>
     {{/if}}
 
     {{#if isTalent}}
     <div class="item-field-row">
       <label class="item-field-label">Tree</label>
-      {{#if isEditable}}
-        <input class="item-field-value" type="text" data-field="flags.veilrunner.talent.treeName" value="{{treeName}}" placeholder="Tree name" />
-      {{else}}
-        <span class="item-field-value">{{treeName}}</span>
-      {{/if}}
+      <span class="item-field-value view-only">{{treeName}}</span>
+      <input class="item-field-value edit-only" type="text" data-field="flags.veilrunner.talent.treeName" value="{{treeName}}" placeholder="Tree name" />
     </div>
     <div class="item-field-row">
       <label class="item-field-label">Tier</label>
-      {{#if isEditable}}
-        <input class="item-field-value item-rank-input" type="number" data-field="flags.veilrunner.talent.tier" value="{{tier}}" min="0" max="5" />
-      {{else}}
-        <span class="item-field-value">{{tier}}</span>
-      {{/if}}
+      <span class="item-field-value view-only">{{tier}}</span>
+      <input class="item-field-value item-rank-input edit-only" type="number" data-field="flags.veilrunner.talent.tier" value="{{tier}}" min="0" max="5" />
     </div>
     <div class="item-field-row">
       <label class="item-field-label">Unlocked</label>
-      {{#if isEditable}}
-        <input type="checkbox" data-field="flags.veilrunner.talent.unlocked" {{#if unlocked}}checked{{/if}} />
-      {{else}}
-        <span class="item-field-value">{{#if unlocked}}Yes{{else}}No{{/if}}</span>
-      {{/if}}
+      <span class="item-field-value view-only">{{#if unlocked}}Yes{{else}}No{{/if}}</span>
+      <input type="checkbox" class="edit-only" data-field="flags.veilrunner.talent.unlocked" {{#if unlocked}}checked{{/if}} />
     </div>
     {{/if}}
 
     <div class="item-field-row item-field-row--description">
       <label class="item-field-label">Description</label>
-      {{#if isEditable}}
-        <textarea class="item-field-value item-description" data-field="system.description" rows="4">{{description}}</textarea>
-      {{else}}
-        <p class="item-field-value item-description-text">{{description}}</p>
-      {{/if}}
+      <p class="item-field-value item-description-text view-only">{{description}}</p>
+      <textarea class="item-field-value item-description edit-only" data-field="system.description" rows="4">{{description}}</textarea>
     </div>
 
   </div>

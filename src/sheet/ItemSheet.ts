@@ -20,6 +20,7 @@ export class VeilrunnerItemSheet extends HandlebarsApplicationMixin(ItemSheetV2)
     classes: ['veilrunner', 'item-sheet'],
     position: { width: 460, height: 380 },
     window: { resizable: true },
+    mode: 1,
     actions: {},
   };
 
@@ -34,15 +35,18 @@ export class VeilrunnerItemSheet extends HandlebarsApplicationMixin(ItemSheetV2)
     const vrFlags    = (flags['veilrunner'] as Record<string, unknown> | undefined) ?? {};
     const talentFlag = (vrFlags['talent']   as Record<string, unknown> | undefined) ?? {};
 
+    const attribute = typeof sys['attribute'] === 'string' ? sys['attribute'] : '';
+    const attributeLabel = ATTRIBUTE_OPTIONS.find(o => o.value === attribute)?.label ?? attribute;
+
     return {
       item,
       system:           sys,
-      isEditable:       this.isEditable,
       isSkill:          item.type === 'skill',
       isTalent:         item.type === 'talent',
       isGear:           item.type === 'gear' || item.type === 'augmentation',
       attributeOptions: ATTRIBUTE_OPTIONS,
-      attribute:        typeof sys['attribute']         === 'string'  ? sys['attribute']         : '',
+      attribute,
+      attributeLabel,
       rank:             typeof sys['rank']              === 'number'  ? sys['rank']              : 0,
       description:      typeof sys['description']       === 'string'  ? sys['description']       : '',
       treeId:           typeof talentFlag['treeId']     === 'string'  ? talentFlag['treeId']     : '',
@@ -58,7 +62,6 @@ export class VeilrunnerItemSheet extends HandlebarsApplicationMixin(ItemSheetV2)
     options: Record<string, unknown>,
   ): void {
     super._attachPartListeners(partId, htmlElement, options);
-    if (!this.isEditable) return;
 
     htmlElement.querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>(
       'input[data-field], select[data-field], textarea[data-field]',

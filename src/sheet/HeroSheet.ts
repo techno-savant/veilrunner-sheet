@@ -293,8 +293,6 @@ export class HeroSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
     const activeTab = this.tabGroups.primary;
     const tabs = TABS.map((t) => ({ ...t, active: t.id === activeTab }));
 
-    const isEditing = (this as unknown as { _mode?: number })._mode === 2;
-
     return {
       actor,
       system,
@@ -309,7 +307,6 @@ export class HeroSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
       gear,
       augmentations,
       details,
-      isEditing,
     };
   }
 
@@ -510,6 +507,15 @@ export class HeroSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
         if (!Number.isFinite(value)) return;
         const item = this.actor.items.get(itemId);
         void item?.update({ 'system.rank': value });
+      });
+    });
+
+    htmlElement.querySelectorAll<HTMLInputElement>('.attr-value-input').forEach((input) => {
+      input.addEventListener('change', () => {
+        const key = input.dataset['attributeKey'];
+        const value = parseInt(input.value, 10);
+        if (typeof key !== 'string' || key === '' || !Number.isFinite(value)) return;
+        void this.actor.update({ [`system.${key}.value`]: value });
       });
     });
   }

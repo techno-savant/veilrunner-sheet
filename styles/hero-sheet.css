@@ -311,6 +311,27 @@
   box-shadow: none;
 }
 
+.veilrunner.hero-sheet .attr-value-input {
+  width: 4rem;
+  padding: 4px 6px;
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  background: var(--bg-elevated);
+  color: var(--text);
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.1;
+  text-align: center;
+  cursor: text;
+}
+
+.veilrunner.hero-sheet .attr-value-input:focus {
+  border-color: var(--accent);
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: none;
+  outline: none;
+}
+
 .veilrunner.hero-sheet .skill-group {
   margin-block: 12px;
 }
@@ -649,6 +670,14 @@
   font-size: 0.8rem;
   color: #9aa2b0;
 }
+
+/* ── Edit / view mode toggle via Foundry's .editable root class ──────────── */
+/* Foundry adds .editable to the sheet root when edit mode is active.        */
+/* view-only elements are hidden in edit mode; edit-only elements are hidden  */
+/* in view mode. No JS mode detection needed.                                 */
+
+.veilrunner:not(.editable) .edit-only { display: none; }
+.veilrunner.editable .view-only { display: none; }
 
 /* ── Skill edit mode ─────────────────────────────────────────────────────── */
 

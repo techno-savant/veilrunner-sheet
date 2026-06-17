@@ -4,7 +4,8 @@
     {{#each attributes}}
     <div class="attribute-cell">
       <div class="attribute-label">{{label}}</div>
-      <button type="button" class="attr-value" data-action="rollAttribute" data-attribute="{{key}}" title="Roll {{label}}">{{value}}</button>
+      <button type="button" class="attr-value view-only" data-action="rollAttribute" data-attribute="{{key}}" title="Roll {{label}}">{{value}}</button>
+      <input type="number" class="attr-value-input edit-only" data-attribute-key="{{key}}" value="{{value}}" min="0" max="10" />
     </div>
     {{/each}}
   </div>
@@ -13,9 +14,7 @@
 <section class="action-skills">
   <div class="section-heading-row">
     <h3 class="section-heading">Skills</h3>
-    {{#if @root.isEditing}}
-    <button type="button" class="add-skill-btn" data-action="addSkill" title="Add skill">+</button>
-    {{/if}}
+    <button type="button" class="add-skill-btn edit-only" data-action="addSkill" title="Add skill">+</button>
   </div>
   {{#if skills.length}}
     {{#each skills}}
@@ -25,16 +24,12 @@
         {{#each skills}}
         <li class="skill-row">
           <span class="skill-name">{{name}}</span>
-          {{#if @root.isEditing}}
-            <input type="number" class="skill-rank-input" data-item-id="{{id}}" value="{{rank}}" min="0" max="10" title="Rank" />
-            <span class="skill-mod">Mod {{rollModifier}}</span>
-            <button type="button" class="skill-edit-btn" data-action="openItem" data-item-id="{{id}}" title="Edit skill">✎</button>
-            <button type="button" class="skill-delete-btn" data-action="deleteSkill" data-item-id="{{id}}" title="Delete skill">×</button>
-          {{else}}
-            <span class="skill-rank">Rank {{rank}}</span>
-            <span class="skill-mod">Mod {{rollModifier}}</span>
-            <button type="button" class="skill-roll-btn" data-action="rollSkill" data-item-id="{{id}}">Roll</button>
-          {{/if}}
+          <span class="skill-rank view-only">Rank {{rank}}</span>
+          <input type="number" class="skill-rank-input edit-only" data-item-id="{{id}}" value="{{rank}}" min="0" max="10" />
+          <span class="skill-mod">Mod {{rollModifier}}</span>
+          <button type="button" class="skill-roll-btn view-only" data-action="rollSkill" data-item-id="{{id}}">Roll</button>
+          <button type="button" class="skill-edit-btn edit-only" data-action="openItem" data-item-id="{{id}}" title="Edit skill">✎</button>
+          <button type="button" class="skill-delete-btn edit-only" data-action="deleteSkill" data-item-id="{{id}}" title="Delete skill">×</button>
         </li>
         {{/each}}
       </ul>
