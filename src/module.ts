@@ -1,8 +1,10 @@
 import { registerSettings } from './settings.js';
 import { HeroSheet } from './sheet/HeroSheet.js';
+import { VeilrunnerItemSheet } from './sheet/ItemSheet.js';
 
 const TEMPLATE_PATHS: ReadonlyArray<string> = [
   'modules/veilrunner-sheet/templates/hero-sheet.hbs',
+  'modules/veilrunner-sheet/templates/item-sheet.hbs',
   'modules/veilrunner-sheet/templates/partials/header.hbs',
   'modules/veilrunner-sheet/templates/partials/pi-tracker.hbs',
   'modules/veilrunner-sheet/templates/partials/tab-action.hbs',
@@ -25,6 +27,12 @@ Hooks.once('init', () => {
     types: ['hero'],
     makeDefault: true,
     label: 'Veilrunner Hero Sheet',
+  });
+
+  Items.registerSheet('Veilrunner-System', VeilrunnerItemSheet, {
+    types: ['skill', 'talent', 'gear', 'augmentation'],
+    makeDefault: true,
+    label: 'Veilrunner Item Sheet',
   });
 
   void loadTemplates(TEMPLATE_PATHS.slice());

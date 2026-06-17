@@ -1,0 +1,76 @@
+<div class="item-sheet-inner">
+  <header class="item-header">
+    <img class="item-img" src="{{item.img}}" alt="" />
+    <div class="item-header-main">
+      {{#if isEditable}}
+        <input class="item-name-input" type="text" data-field="name" value="{{item.name}}" placeholder="Item name" />
+      {{else}}
+        <h2 class="item-name-display">{{item.name}}</h2>
+      {{/if}}
+      <span class="item-type-tag">{{item.type}}</span>
+    </div>
+  </header>
+
+  <div class="item-body">
+
+    {{#if isSkill}}
+    <div class="item-field-row">
+      <label class="item-field-label">Attribute</label>
+      {{#if isEditable}}
+        <select class="item-field-value" data-field="system.attribute">
+          {{#each attributeOptions}}
+          <option value="{{value}}" {{#if (eq ../attribute value)}}selected{{/if}}>{{label}}</option>
+          {{/each}}
+        </select>
+      {{else}}
+        <span class="item-field-value">{{attribute}}</span>
+      {{/if}}
+    </div>
+    <div class="item-field-row">
+      <label class="item-field-label">Rank</label>
+      {{#if isEditable}}
+        <input class="item-field-value item-rank-input" type="number" data-field="system.rank" value="{{rank}}" min="0" max="10" />
+      {{else}}
+        <span class="item-field-value">{{rank}}</span>
+      {{/if}}
+    </div>
+    {{/if}}
+
+    {{#if isTalent}}
+    <div class="item-field-row">
+      <label class="item-field-label">Tree</label>
+      {{#if isEditable}}
+        <input class="item-field-value" type="text" data-field="flags.veilrunner.talent.treeName" value="{{treeName}}" placeholder="Tree name" />
+      {{else}}
+        <span class="item-field-value">{{treeName}}</span>
+      {{/if}}
+    </div>
+    <div class="item-field-row">
+      <label class="item-field-label">Tier</label>
+      {{#if isEditable}}
+        <input class="item-field-value item-rank-input" type="number" data-field="flags.veilrunner.talent.tier" value="{{tier}}" min="0" max="5" />
+      {{else}}
+        <span class="item-field-value">{{tier}}</span>
+      {{/if}}
+    </div>
+    <div class="item-field-row">
+      <label class="item-field-label">Unlocked</label>
+      {{#if isEditable}}
+        <input type="checkbox" data-field="flags.veilrunner.talent.unlocked" {{#if unlocked}}checked{{/if}} />
+      {{else}}
+        <span class="item-field-value">{{#if unlocked}}Yes{{else}}No{{/if}}</span>
+      {{/if}}
+    </div>
+    {{/if}}
+
+    <div class="item-field-row item-field-row--description">
+      <label class="item-field-label">Description</label>
+      {{#if isEditable}}
+        <textarea class="item-field-value item-description" data-field="system.description" rows="4">{{description}}</textarea>
+      {{else}}
+        <p class="item-field-value item-description-text">{{description}}</p>
+      {{/if}}
+    </div>
+
+  </div>
+</div>

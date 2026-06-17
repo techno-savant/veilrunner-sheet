@@ -163,12 +163,15 @@ export class HeroSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
     position: { width: 800, height: 660 },
     window: { resizable: true, title: 'Veilrunner Hero' },
     actions: {
-      rollSkill: HeroSheet.#rollSkill,
-      rollAttribute: HeroSheet.#rollAttribute,
-      adjustPI: HeroSheet.#adjustPI,
-      changeTab: HeroSheet.#changeTab,
+      rollSkill:       HeroSheet.#rollSkill,
+      rollAttribute:   HeroSheet.#rollAttribute,
+      adjustPI:        HeroSheet.#adjustPI,
+      changeTab:       HeroSheet.#changeTab,
       showTalentDetail: HeroSheet.#showTalentDetail,
       toggleItemDetail: HeroSheet.#toggleItemDetail,
+      addSkill:        HeroSheet.#addSkill,
+      deleteSkill:     HeroSheet.#deleteSkill,
+      openItem:        HeroSheet.#openItem,
     },
   };
 
@@ -290,6 +293,8 @@ export class HeroSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
     const activeTab = this.tabGroups.primary;
     const tabs = TABS.map((t) => ({ ...t, active: t.id === activeTab }));
 
+    const isEditing = (this as unknown as { _mode?: number })._mode === 2;
+
     return {
       actor,
       system,
@@ -304,6 +309,7 @@ export class HeroSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
       gear,
       augmentations,
       details,
+      isEditing,
     };
   }
 
@@ -464,6 +470,48 @@ export class HeroSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
     const row = root.querySelector<HTMLElement>(`.item-row[data-item-id="${cssEscape(itemId)}"]`);
     if (!row) return;
     row.classList.toggle('expanded');
+  }
+
+  static async #addSkill(this: HeroSheet): Promise<void> {
+    await this.actor.createEmbeddedDocuments('Item', [{
+      type: 'skill',
+      name: 'New Skill',
+      system: { attribute: 'strength', rank: 0 },
+    }]);
+    await this.render(false);
+  }
+
+  static async #deleteSkill(this: HeroSheet, _event: Event, target: HTMLElement): Promise<void> {
+    const itemId = target.dataset['itemId'];
+    if (typeof itemId !== 'string' || itemId === '') return;
+    await this.actor.deleteEmbeddedDocuments('Item', [itemId]);
+    await this.render(false);
+  }
+
+  static async #openItem(this: HeroSheet, _event: Event, target: HTMLElement): Promise<void> {
+    const itemId = target.dataset['itemId'];
+    if (typeof itemId !== 'string' || itemId === '') return;
+    const item = this.actor.items.get(itemId);
+    await item?.sheet?.render(true);
+  }
+
+  _attachPartListeners(
+    partId: string,
+    htmlElement: HTMLElement,
+    options: Record<string, unknown>,
+  ): void {
+    super._attachPartListeners(partId, htmlElement, options);
+
+    htmlElement.querySelectorAll<HTMLInputElement>('.skill-rank-input').forEach((input) => {
+      input.addEventListener('change', () => {
+        const itemId = input.dataset['itemId'];
+        if (typeof itemId !== 'string' || itemId === '') return;
+        const value = parseInt(input.value, 10);
+        if (!Number.isFinite(value)) return;
+        const item = this.actor.items.get(itemId);
+        void item?.update({ 'system.rank': value });
+      });
+    });
   }
 }
 

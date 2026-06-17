@@ -52,10 +52,28 @@ declare global {
     constructor(...args: unknown[]);
     readonly actor: FoundryActor;
     readonly element: HTMLElement;
+    readonly isEditable: boolean;
+    _mode: number;
     render(force?: boolean, options?: Record<string, unknown>): Promise<this>;
     close(options?: Record<string, unknown>): Promise<this>;
+    _attachPartListeners(partId: string, htmlElement: HTMLElement, options: Record<string, unknown>): void;
     static DEFAULT_OPTIONS: Record<string, unknown>;
   }
+
+  class ItemSheetV2 {
+    constructor(...args: unknown[]);
+    readonly item: FoundryItem;
+    readonly isEditable: boolean;
+    readonly element: HTMLElement;
+    render(force?: boolean, options?: Record<string, unknown>): Promise<this>;
+    close(options?: Record<string, unknown>): Promise<this>;
+    _attachPartListeners(partId: string, htmlElement: HTMLElement, options: Record<string, unknown>): void;
+    static DEFAULT_OPTIONS: Record<string, unknown>;
+  }
+
+  const Items: {
+    registerSheet(system: string, cls: unknown, options: Record<string, unknown>): void;
+  };
 
   // The mixin returns a constructor that preserves the instance shape of the
   // base class — TypeScript cannot model the full Foundry mixin contract from
@@ -73,6 +91,8 @@ declare global {
     readonly type: string;
     readonly system: Record<string, unknown>;
     readonly flags: Record<string, unknown>;
+    readonly sheet?: { render(force?: boolean): Promise<unknown> };
+    update(data: Record<string, unknown>): Promise<FoundryItem>;
   }
 
   interface FoundryActor {
@@ -84,6 +104,8 @@ declare global {
       get(id: string): FoundryItem | undefined;
     };
     update(data: Record<string, unknown>): Promise<FoundryActor>;
+    createEmbeddedDocuments(type: string, data: Array<Record<string, unknown>>): Promise<FoundryItem[]>;
+    deleteEmbeddedDocuments(type: string, ids: string[]): Promise<FoundryItem[]>;
   }
 }
 

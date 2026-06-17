@@ -11,7 +11,12 @@
 </section>
 
 <section class="action-skills">
-  <h3 class="section-heading">Skills</h3>
+  <div class="section-heading-row">
+    <h3 class="section-heading">Skills</h3>
+    {{#if @root.isEditing}}
+    <button type="button" class="add-skill-btn" data-action="addSkill" title="Add skill">+</button>
+    {{/if}}
+  </div>
   {{#if skills.length}}
     {{#each skills}}
     <div class="skill-group">
@@ -20,9 +25,16 @@
         {{#each skills}}
         <li class="skill-row">
           <span class="skill-name">{{name}}</span>
-          <span class="skill-rank">Rank {{rank}}</span>
-          <span class="skill-mod">Mod {{rollModifier}}</span>
-          <button type="button" class="skill-roll-btn" data-action="rollSkill" data-item-id="{{id}}">Roll</button>
+          {{#if @root.isEditing}}
+            <input type="number" class="skill-rank-input" data-item-id="{{id}}" value="{{rank}}" min="0" max="10" title="Rank" />
+            <span class="skill-mod">Mod {{rollModifier}}</span>
+            <button type="button" class="skill-edit-btn" data-action="openItem" data-item-id="{{id}}" title="Edit skill">✎</button>
+            <button type="button" class="skill-delete-btn" data-action="deleteSkill" data-item-id="{{id}}" title="Delete skill">×</button>
+          {{else}}
+            <span class="skill-rank">Rank {{rank}}</span>
+            <span class="skill-mod">Mod {{rollModifier}}</span>
+            <button type="button" class="skill-roll-btn" data-action="rollSkill" data-item-id="{{id}}">Roll</button>
+          {{/if}}
         </li>
         {{/each}}
       </ul>

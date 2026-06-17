@@ -4,7 +4,7 @@ import { defineConfig } from 'vite';
 export default defineConfig({
   resolve: {
     alias: {
-      '@lexicon-core': resolve(__dirname, '../lexicon-core/src'),
+      '@lex': resolve(__dirname, '../lexicon-core/src'),
     },
   },
   build: {

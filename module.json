@@ -15,7 +15,7 @@
   "languages": [],
   "relationships": {
     "requires": [
-      { "id": "lexicon-core", "type": "module" }
+      { "id": "lex", "type": "module" }
     ],
     "systems": [
       {

@@ -649,3 +649,283 @@
   font-size: 0.8rem;
   color: #9aa2b0;
 }
+
+/* ── Skill edit mode ─────────────────────────────────────────────────────── */
+
+.veilrunner.hero-sheet .section-heading-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.veilrunner.hero-sheet .section-heading-row .section-heading {
+  margin: 0;
+}
+
+.veilrunner.hero-sheet .add-skill-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: 1px solid var(--border-strong);
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--accent) 22%, var(--bg-elevated));
+  color: var(--accent-strong);
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+  transition: background-color 120ms ease, border-color 120ms ease;
+}
+
+.veilrunner.hero-sheet .add-skill-btn:hover,
+.veilrunner.hero-sheet .add-skill-btn:focus {
+  background: color-mix(in srgb, var(--accent) 38%, var(--bg-elevated));
+  border-color: var(--accent-strong);
+  box-shadow: none;
+}
+
+.veilrunner.hero-sheet .skill-rank-input {
+  width: 3.5rem;
+  padding: 2px 6px;
+  border: 1px solid var(--border-strong);
+  border-radius: 6px;
+  background: var(--bg-elevated);
+  color: var(--text);
+  font-family: monospace;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.veilrunner.hero-sheet .skill-rank-input:focus {
+  border-color: var(--accent);
+  box-shadow: none;
+  outline: none;
+}
+
+.veilrunner.hero-sheet .skill-edit-btn,
+.veilrunner.hero-sheet .skill-delete-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: 1px solid var(--border-strong);
+  border-radius: 6px;
+  background: var(--bg-elevated);
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 120ms ease, color 120ms ease;
+}
+
+.veilrunner.hero-sheet .skill-edit-btn:hover,
+.veilrunner.hero-sheet .skill-edit-btn:focus {
+  background: color-mix(in srgb, var(--accent) 22%, var(--bg-elevated));
+  color: var(--accent-strong);
+  box-shadow: none;
+}
+
+.veilrunner.hero-sheet .skill-delete-btn:hover,
+.veilrunner.hero-sheet .skill-delete-btn:focus {
+  background: color-mix(in srgb, #9c4a4a 35%, var(--bg-elevated));
+  color: #f4a0a0;
+  box-shadow: none;
+}
+
+/* ── Item Sheet ──────────────────────────────────────────────────────────── */
+
+.veilrunner.item-sheet {
+  --bg: #1c1d22;
+  --bg-elevated: #25262c;
+  --bg-card: #2a2c34;
+  --border: #3a3c44;
+  --border-strong: #555864;
+  --text: #d8d8dd;
+  --text-muted: #9098a6;
+  --accent: #5a8ac9;
+  --accent-strong: #8ab2eb;
+
+  color: var(--text);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 20%),
+    var(--bg);
+}
+
+.veilrunner.item-sheet .window-content {
+  padding: 0;
+  background: transparent;
+  color: inherit;
+}
+
+.veilrunner.item-sheet .item-sheet-inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  font-family: Signika, sans-serif;
+}
+
+.veilrunner.item-sheet .item-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-card);
+}
+
+.veilrunner.item-sheet .item-img {
+  width: 48px;
+  height: 48px;
+  flex: 0 0 48px;
+  object-fit: cover;
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  background: var(--bg-elevated);
+}
+
+.veilrunner.item-sheet .item-header-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.veilrunner.item-sheet .item-name-input {
+  width: 100%;
+  padding: 0;
+  border: 0;
+  border-bottom: 1px solid transparent;
+  border-radius: 0;
+  background: transparent;
+  color: var(--text);
+  font-size: 1.3rem;
+  font-weight: 700;
+  box-shadow: none;
+}
+
+.veilrunner.item-sheet .item-name-input:hover,
+.veilrunner.item-sheet .item-name-input:focus {
+  border-bottom-color: var(--accent);
+  box-shadow: none;
+}
+
+.veilrunner.item-sheet .item-name-display {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.veilrunner.item-sheet .item-type-tag {
+  display: inline-block;
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 20%, var(--bg-elevated));
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, var(--border));
+  color: var(--accent-strong);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  width: fit-content;
+}
+
+.veilrunner.item-sheet .item-body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.veilrunner.item-sheet .item-field-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.veilrunner.item-sheet .item-field-row--description {
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.veilrunner.item-sheet .item-field-label {
+  min-width: 7em;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+}
+
+.veilrunner.item-sheet .item-field-value {
+  flex: 1;
+  background: transparent;
+  color: var(--text);
+  border: 0;
+  border-bottom: 1px solid transparent;
+  border-radius: 0;
+  box-shadow: none;
+  font-size: 0.9rem;
+  padding: 2px 4px;
+}
+
+.veilrunner.item-sheet .item-field-value:focus,
+.veilrunner.item-sheet .item-field-value:hover {
+  border-bottom-color: var(--accent);
+  box-shadow: none;
+}
+
+.veilrunner.item-sheet select.item-field-value {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-strong);
+  border-radius: 6px;
+  padding: 4px 8px;
+}
+
+.veilrunner.item-sheet .item-rank-input {
+  max-width: 5em;
+  text-align: center;
+  font-family: monospace;
+}
+
+.veilrunner.item-sheet .item-description {
+  width: 100%;
+  min-height: 80px;
+  padding: 8px;
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  background: var(--bg-elevated);
+  color: var(--text);
+  font-size: 0.88rem;
+  line-height: 1.5;
+  resize: vertical;
+  box-shadow: none;
+}
+
+.veilrunner.item-sheet .item-description:focus {
+  border-color: var(--accent);
+  box-shadow: none;
+}
+
+.veilrunner.item-sheet .item-description-text {
+  flex: 1;
+  margin: 0;
+  padding: 6px 8px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-elevated);
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  width: 100%;
+}
